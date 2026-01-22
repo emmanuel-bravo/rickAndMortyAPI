@@ -5,254 +5,410 @@
 }
 
 body {
-    font-family: 'Verdana';
-    background-color: #1a2238;
-    color: #e8e8e8;
+    font-family: 'Verdana', sans-serif;
+    background: linear-gradient(135deg, #0a0e17 0%, #1a1f2e 100%);
+    color: #e0e0e0;
     min-height: 100vh;
     padding: 20px;
     line-height: 1.6;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(97, 218, 251, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(186, 85, 211, 0.05) 0%, transparent 20%);
 }
 
-/* HEADER */
+/* HEADER - Rick and Morty Style */
 header {
-    background-color: #2d374f;
-    padding: 25px;
-    border-radius: 12px;
-    margin-bottom: 30px;
-    border-bottom: 3px solid #4a9c82;
+    background: linear-gradient(90deg, #0f2d3d 0%, #1c3b52 100%);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 35px;
+    border: 3px solid #61dafb;
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(97, 218, 251, 0.15);
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #ba55d3, #61dafb, transparent);
+    animation: portalGlow 3s infinite linear;
+}
+
+@keyframes portalGlow {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
 h1 {
-    color: #9dcc5f;
-    font-size: 2.2rem;
-    margin-bottom: 20px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    color: #61dafb;
+    font-size: 2.4rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 15px rgba(97, 218, 251, 0.4);
+    position: relative;
+    z-index: 1;
 }
 
-h1::after {     
-    color: #ffd166;
+h1::after {
+    content: '⚡';
+    margin-left: 10px;
+    color: #ffd700;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 #inputSearch {
-    padding: 12px 18px;
-    border: 2px solid #4a9c82;
-    border-radius: 8px;
-    background-color: #3a465e;
-    color: white;
-    font-size: 1rem;
-    width: 300px;
-    margin-right: 10px;
+    padding: 14px 20px;
+    border: 2px solid #ba55d3;
+    border-radius: 10px;
+    background: rgba(15, 45, 61, 0.8);
+    color: #fff;
+    font-size: 1.1rem;
+    width: 320px;
     outline: none;
-    transition: border-color 0.3s;
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
 }
 
 #inputSearch:focus {
-    border-color: #9dcc5f;
-    background-color: #45526e;
-}
-
-#btnSearch {
-    padding: 12px 24px;
-    background-color: #4a9c82;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.2s;
-}
-
-#btnSearch:hover {
-    background-color: #5bb194;
+    border-color: #61dafb;
+    background: rgba(28, 59, 82, 0.9);
+    box-shadow: 0 0 20px rgba(97, 218, 251, 0.3);
     transform: translateY(-2px);
 }
 
-/* CONTAINER DE TARJETAS */
+#btnSearch {
+    padding: 14px 28px;
+    background: linear-gradient(45deg, #ba55d3 0%, #61dafb 100%);
+    border: none;
+    border-radius: 10px;
+    color: #0a0e17;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#btnSearch:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(186, 85, 211, 0.4);
+    background: linear-gradient(45deg, #61dafb 0%, #ba55d3 100%);
+}
+
+/* CONTAINER DE TARJETAS - Dimensión C-137 */
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 25px;
 }
 
 .card {
-    background-color: #2d374f;
-    border-radius: 12px;
-    padding: 20px;
-    border-top: 4px solid #9dcc5f;
-    transition: all 0.25s ease;
+    background: linear-gradient(145deg, #1c3b52 0%, #0f2d3d 100%);
+    border-radius: 16px;
+    padding: 25px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #61dafb, #ba55d3, #ffd700);
+    opacity: 0.7;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    border-top-color: #ffd166;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(97, 218, 251, 0.2);
+    border-color: #61dafb;
 }
 
 .card h2 {
-    color: #e8e8e8;
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-    font-weight: 600;
-    height: 60px;
+    color: #ffd700;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 10px;
+    padding: 0 15px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .card img {
     width: 100%;
-    border-radius: 8px;
-    border: 2px solid #45526e;
-    margin-bottom: 15px;
-    transition: border-color 0.3s;
+    border-radius: 12px;
+    border: 3px solid rgba(97, 218, 251, 0.3);
+    margin-bottom: 20px;
+    transition: all 0.3s;
+    filter: saturate(1.1);
 }
 
 .card:hover img {
-    border-color: #9dcc5f;
+    border-color: #ba55d3;
+    transform: scale(1.05);
+    filter: saturate(1.3);
 }
 
 .btn {
-    background-color: #4a9c82;
+    background: linear-gradient(45deg, #ff6b6b 0%, #ffd700 100%);
     border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    color: white;
-    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 10px;
+    color: #0a0e17;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.2s;
+    font-size: 1.1rem;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 15px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .btn:hover {
-    background-color: #5bb194;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(91, 177, 148, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
 }
 
-/* DETALLES */
+/* DETALLES - Citadel Theme */
 .details {
-    background-color: #2d374f;
-    border-radius: 12px;
-    padding: 30px;
-    border-left: 5px solid #9dcc5f;
-    max-width: 700px;
-    margin: 30px auto;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, #0f2d3d 0%, #1c3b52 100%);
+    border-radius: 20px;
+    padding: 35px;
+    border-left: 6px solid #ba55d3;
+    max-width: 750px;
+    margin: 35px auto;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.details::before {
+    content: '🔬';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    opacity: 0.1;
 }
 
 .details div {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     line-height: 1.8;
     margin-bottom: 30px;
-    padding: 25px;
-    background-color: #3a465e;
-    border-radius: 10px;
-    border: 1px solid #45526e;
+    padding: 30px;
+    background: rgba(28, 59, 82, 0.6);
+    border-radius: 12px;
+    border: 2px solid rgba(97, 218, 251, 0.2);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    backdrop-filter: blur(10px);
 }
 
 .details div strong {
-    color: #ffd166;
+    color: #61dafb;
     display: inline-block;
-    width: 120px;
+    width: 140px;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(97, 218, 251, 0.3);
 }
 
 #btnBack {
-    background-color: #45526e;
-    border: 2px solid #4a9c82;
-    padding: 14px 28px;
-    border-radius: 8px;
-    color: white;
-    font-weight: 600;
+    background: linear-gradient(45deg, #1c3b52 0%, #0f2d3d 100%);
+    border: 2px solid #ff6b6b;
+    padding: 16px 32px;
+    border-radius: 10px;
+    color: #ffd700;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 1.1rem;
-    transition: all 0.2s;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    display: block;
+    margin: 0 auto;
+    text-transform: uppercase;
 }
 
 #btnBack:hover {
-    background-color: #4a9c82;
-    transform: translateY(-2px);
+    background: linear-gradient(45deg, #0f2d3d 0%, #1c3b52 100%);
+    border-color: #61dafb;
+    color: #61dafb;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(97, 218, 251, 0.3);
 }
 
 .invisible {
     display: none;
 }
 
-/* MEJORAS PARA EL CONTENIDO DE DETALLES */
-.details div {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-/* RESPONSIVE */
+/* RESPONSIVE - Para todos los universos */
 @media (max-width: 768px) {
     .container {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        padding: 10px;
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+        padding: 15px;
+        gap: 25px;
     }
     
     header {
-        padding: 20px 15px;
+        padding: 25px 20px;
+        margin-bottom: 25px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    #inputSearch {
+        width: 100%;
+        max-width: 320px;
+        margin-bottom: 10px;
+    }
+    
+    .details {
+        margin: 25px 15px;
+        padding: 25px;
+    }
+    
+    .details div {
+        grid-template-columns: 1fr;
+        padding: 25px;
+        gap: 15px;
+    }
+    
+    .search-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
     }
     
     h1 {
         font-size: 1.8rem;
     }
     
-    #inputSearch {
-        width: 100%;
-        margin-bottom: 15px;
-        margin-right: 0;
+    .card h2 {
+        font-size: 1.3rem;
+        height: 60px;
     }
     
-    .details {
-        margin: 20px;
-        padding: 20px;
-    }
-    
-    .details div {
-        grid-template-columns: 1fr;
-        padding: 20px;
+    #btnSearch, .btn, #btnBack {
+        padding: 12px 24px;
+        font-size: 1rem;
     }
 }
 
-/* EFECTOS SUTILES */
-@keyframes subtleGlow {
-    0%, 100% { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
-    50% { box-shadow: 0 4px 12px rgba(157, 204, 95, 0.15); }
-}
-
-.card {
-    animation: subtleGlow 4s infinite ease-in-out;
-}
-
-/* SCROLLBAR PERSONALIZADA */
+/* SCROLLBAR - Portal Fluid */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #2d374f;
+    background: #0f2d3d;
+    border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #4a9c82;
-    border-radius: 5px;
+    background: linear-gradient(45deg, #61dafb, #ba55d3);
+    border-radius: 6px;
+    border: 2px solid #0f2d3d;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #5bb194;
+    background: linear-gradient(45deg, #ba55d3, #ffd700);
+}
+
+/* Efectos especiales Rick and Morty */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.card:nth-child(odd) {
+    animation: float 6s ease-in-out infinite;
+}
+
+.card:nth-child(even) {
+    animation: float 6s ease-in-out infinite 1s;
+}
+
+/* Particles efecto fondo */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(97, 218, 251, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(186, 85, 211, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
 }
